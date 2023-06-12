@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { Box, TextareaAutosize, Button, styled } from '@mui/material';
-
+import url from "../../../assets/userImage.png"
 import { DataContext } from '../../../context/DataProvider';
 
 import { API } from '../../../service/api';
@@ -33,8 +33,7 @@ const initialValue = {
 }
 
 const Comments = ({ post }) => {
-    const url = 'https://static.thenounproject.com/png/12017-200.png'
-
+    
     const [comment, setComment] = useState(initialValue);
     const [comments, setComments] = useState([]);
     const [toggle, setToggle] = useState(false);
@@ -69,7 +68,7 @@ const Comments = ({ post }) => {
     return (
         <Box>
             <Container>
-                <Image src={url} alt="dp" />   
+                <img src={url}  className="h-10" alt="dp" />   
                 <StyledTextArea 
                     rowsMin={5} 
                     placeholder="what's on your mind?"

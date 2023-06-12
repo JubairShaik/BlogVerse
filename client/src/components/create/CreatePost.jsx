@@ -4,7 +4,7 @@ import { styled, Box, TextareaAutosize, Button, InputBase, FormControl  } from '
 import { AddCircle as Add } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { API } from '../../service/api';
+import { API } from '../../service/api.js';
 import { DataContext } from '../../context/DataProvider';
 
 const Container = styled(Box)(({ theme }) => ({
@@ -14,11 +14,7 @@ const Container = styled(Box)(({ theme }) => ({
     }
 }));
 
-const Image = styled('img')({
-    width: '100%',
-    height: '50vh',
-    objectFit: 'cover'
-});
+
 
 const StyledFormControl = styled(FormControl)`
     margin-top: 10px;
@@ -52,11 +48,14 @@ const initialPost = {
 }
 
 const CreatePost = () => {
+
     const navigate = useNavigate();
     const location = useLocation();
 
     const [post, setPost] = useState(initialPost);
     const [file, setFile] = useState('');
+
+
     const { account } = useContext(DataContext);
 
     const url = post.picture ? post.picture : 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
@@ -77,6 +76,12 @@ const CreatePost = () => {
         post.username = account.username;
     }, [file])
 
+
+
+ 
+
+
+
     const savePost = async () => {
         await API.createPost(post);
         navigate('/');
@@ -88,12 +93,16 @@ const CreatePost = () => {
 
     return (
         <Container>
-            <Image src={url} alt="post" />
 
+            <div className="">
+                <img src={url} className="w-full h-[50vh] object-cover"  alt="" />
+            </div>
+            
             <StyledFormControl>
-                <label htmlFor="fileInput">
+                <label htmlFor="fileInput" >
                     <Add fontSize="large" color="action" />
                 </label>
+
                 <input
                     type="file"
                     id="fileInput"

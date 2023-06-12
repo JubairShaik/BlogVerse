@@ -1,18 +1,20 @@
+// upload.js
+
 import multer from 'multer';
 import { GridFsStorage } from 'multer-gridfs-storage';
-// import dotenv from 'dotenv'
+import dotenv from 'dotenv'
 
-// const username = process.env.DB_USERNAME
-// const password = process.env.DB_PASSWORD
+const username = process.env.DB_USERNAME
+const password = process.env.DB_PASSWORD
 
 const storage = new GridFsStorage({
-    url: `mongodb+srv://user:blogverse@cluster0.ignzpqv.mongodb.net/?retryWrites=true&w=majority`,
+    url: `mongodb+srv://${username}:${password}@cluster0.ignzpqv.mongodb.net/?retryWrites=true&w=majority`,
     options: { useNewUrlParser: true },
-   
+    // third argument
     file: (request, file) => {
         const match = ["image/png", "image/jpg"];
       
-        if (match.indexOf(file.mimetype) === -1)
+        if (match.indexOf(file.memeType) === -1)
           return `${Date.now()}-blog-${file.originalname}`;
       
         return {

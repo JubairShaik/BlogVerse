@@ -6,16 +6,16 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 //components
 import DataProvider from './context/DataProvider';
 import Header from './components/header/Header';
-import BlogHome from './components/home/BlogHome';
 import CreatePost from './components/create/CreatePost';
 import DetailView from './components/details/DetailView';
 import Update from './components/create/Update';
-// import About from './components/about/About';
 import Contact from './components/contact/Contact';
 import Login from './components/account/Login';
-import Signup from './components/account/Signup';
 import Container from '@mui/material/Container';
 import Main from './components/main/Main';
+import Aboutme from './components/aboutme/Aboutme';
+import Profile from './components/profile/Profile';
+ 
 
 
 
@@ -31,7 +31,9 @@ const PrivateRoute = ({ isAuthenticated, ...props }) => {
   return isAuthenticated && token ? 
     <>
        <Header />
-       <div className="max-w-[92rem]" >
+       
+       <div>
+       
        <Outlet />
        
        </div>
@@ -75,7 +77,11 @@ function App() {
 
 
           <Route path='/about' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
-          <Route path='/about' element={<BlogHome />} />
+          <Route path='/about' element={<Aboutme/>} />
+          </Route>
+
+          <Route path='/profile' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+          <Route path='/profile' element={<Profile/>} />
           </Route>
 
 

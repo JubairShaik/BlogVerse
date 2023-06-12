@@ -11,12 +11,7 @@ import { DataContext } from '../../context/DataProvider';
 // components
 import Comments from './comments/Comments';
 
-const Container = styled(Box)(({ theme }) => ({
-    margin: '50px 100px',
-    [theme.breakpoints.down('md')]: {
-        margin: 0
-    },
-}));
+ 
 
 const Image = styled('img')({
     width: '100%',
@@ -45,14 +40,7 @@ const Heading = styled(Typography)`
     margin: 50px 0 10px 0;
 `;
 
-const Author = styled(Box)(({ theme }) => ({
-    color: '#878787',
-    display: 'flex',
-    margin: '20px 0',
-    [theme.breakpoints.down('sm')]: {
-        display: 'block'
-    },
-}));
+ 
 
 const DetailView = () => {
     const url = 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
@@ -79,8 +67,10 @@ const DetailView = () => {
     }
 
     return (
-        <Container>
+        <div className="mx-auto my:5 sm:my-10 max-w-7xl px-6 lg:px-8">
             <Image src={post.picture || url} alt="post" />
+
+
             <Box style={{ float: 'right' }}>
                 {   
                     account.username === post.username && 
@@ -90,18 +80,24 @@ const DetailView = () => {
                     </>
                 }
             </Box>
-            <Heading>{post.title}</Heading>
 
-            <Author>
+
+            <h1 className="sm:mt-10  mt-5 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">{post.title}</h1>
+
+            <div
+            className="flex my-2 sm:my-5"
+            >
                 <Link to={`/?username=${post.username}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Typography>Author: <span style={{fontWeight: 600}}>{post.username}</span></Typography>
+                    <p>Published by: <span style={{fontWeight: 600}}>{post.username}</span></p>
                 </Link>
-                <Typography style={{marginLeft: 'auto'}}>{new Date(post.createdDate).toDateString()}</Typography>
-            </Author>
+                <p  className="ml-auto text-blue-500"> Published on :{new Date(post.createdDate).toDateString()}</p>
+            </div>
 
-            <Typography>{post.description}</Typography>
+             <p className="text-justify leading-7 text-[17px]" >
+             {post.description}
+             </p>
             <Comments post={post} />
-        </Container>
+        </div>
     )
 }
 

@@ -24,6 +24,13 @@ router.get('/post/:id', authenticateToken, getPost);
 router.get('/posts', authenticateToken, getAllPosts);
 
 router.post('/file/upload', upload.single('file'), uploadImage);
+ 
+
+// route - middleware - function
+
+
+
+
 router.get('/file/:filename', getImage);
 
 router.post('/comment/new', authenticateToken, newComment);

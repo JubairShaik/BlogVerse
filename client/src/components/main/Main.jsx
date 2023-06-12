@@ -1,19 +1,21 @@
 import Banner from "./../banner/Banner";
 import Categories from "./Categories";
 import CategoriesHeader from "./CategoriesHeader";
-import { Grid } from "@mui/material";
 import Posts from "./post/Posts";
-import Stack from "@mui/material/Stack";
+import Footer from "../footer/Footer.jsx";
+
+
+
 
 const Main = () => {
   return (
     <>
       <CategoriesHeader />
        <div className="flex flex-wrap items-center justify-center gap-7 mt-5"  >
-      <Posts />
-      
+         <Posts />
        </div>
       <Banner />
+      <Footer/>
     </>
   );
 };
