@@ -1,6 +1,5 @@
 import { useState ,useEffect} from 'react';
-
-import { Box } from '@mui/material';
+ 
 import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 
 //components
@@ -11,7 +10,6 @@ import DetailView from './components/details/DetailView';
 import Update from './components/create/Update';
 import Contact from './components/contact/Contact';
 import Login from './components/account/Login';
-import Container from '@mui/material/Container';
 import Main from './components/main/Main';
 import Aboutme from './components/aboutme/Aboutme';
 import Profile from './components/profile/Profile';

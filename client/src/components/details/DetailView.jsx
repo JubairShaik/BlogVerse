@@ -1,104 +1,104 @@
 import { useState, useEffect, useContext } from 'react';
-
-import { Box, Typography, styled } from '@mui/material';
-import { Delete, Edit } from '@mui/icons-material';
-import { Link, useNavigate, useParams } from 'react-router-dom'
-
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { API } from '../../service/api';
-
 import { DataContext } from '../../context/DataProvider';
-
-// components
 import Comments from './comments/Comments';
 
- 
-
-const Image = styled('img')({
-    width: '100%',
-    height: '50vh',
-    objectFit: 'cover'
-});
-
-const EditIcon = styled(Edit)`
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid #878787;
-    border-radius: 10px;
-`;
-
-const DeleteIcon = styled(Delete)`
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid #878787;
-    border-radius: 10px;
-`;
-
-const Heading = styled(Typography)`
-    font-size: 38px;
-    font-weight: 600;
-    text-align: center;
-    margin: 50px 0 10px 0;
-`;
-
- 
-
 const DetailView = () => {
-    const url = 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
-    
-    const [post, setPost] = useState({});
-    const { account } = useContext(DataContext);
+  const url =
+    'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
 
-    const navigate = useNavigate();
-    const { id } = useParams();
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            let response = await API.getPostById(id);
-            if (response.isSuccess) {
-                setPost(response.data);
-            }
-        }
-        fetchData();
-    }, []);
+  const [post, setPost] = useState({});
+  const { account } = useContext(DataContext);
 
-    const deleteBlog = async () => {  
-        await API.deletePost(post._id);
-        navigate('/')
-    }
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    return (
-        <div className="mx-auto my:5 sm:my-10 max-w-7xl px-6 lg:px-8">
-            <Image src={post.picture || url} alt="post" />
+  useEffect(() => {
+    const fetchData = async () => {
+      let response = await API.getPostById(id);
+      if (response.isSuccess) {
+        setPost(response.data);
+      }
+    };
+    fetchData();
+  }, []);
 
+  const deleteBlog = async () => {
+    await API.deletePost(post._id);
+    navigate('/');
+  };
 
-            <Box style={{ float: 'right' }}>
-                {   
-                    account.username === post.username && 
-                    <>  
-                        <Link to={`/update/${post._id}`}><EditIcon color="primary" /></Link>
-                        <DeleteIcon onClick={() => deleteBlog()} color="error" />
-                    </>
-                }
-            </Box>
+  return (
+    <div className="mx-auto my-5 sm:my-10 max-w-7xl px-6 lg:px-8">
+      <img src={post.picture || url} alt="post" className="w-full object-cover  h-[50vh]" />
 
-
-            <h1 className="sm:mt-10  mt-5 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">{post.title}</h1>
-
-            <div
-            className="flex my-2 sm:my-5"
+      <div className="float-right">
+        {account.username === post.username && (
+          <>
+            <Link to={`/update/${post._id}`}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 inline-block cursor-pointer text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6v6a4 4 0 004 4h2a6 6 0 006-6V6M4 6L2 6M22 6l-2 2"
+                />
+              </svg>
+            </Link>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 inline-block cursor-pointer text-error"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              onClick={() => deleteBlog()}
             >
-                <Link to={`/?username=${post.username}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <p>Published by: <span style={{fontWeight: 600}}>{post.username}</span></p>
-                </Link>
-                <p  className="ml-auto text-blue-500"> Published on :{new Date(post.createdDate).toDateString()}</p>
-            </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </>
+        )}
+      </div>
 
-             <p className="text-justify leading-7 text-[17px]" >
-             {post.description}
-             </p>
-            <Comments post={post} />
-        </div>
-    )
-}
+      <h1 className="sm:mt-10 mt-5 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
+        {post.title}
+      </h1>
+
+      <div className="flex my-2 sm:my-5">
+        <Link
+          to={`/?username=${post.username}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          <p>
+            Published by: <span className="font-semibold">{post.username}</span>
+          </p>
+        </Link>
+        <p className="ml-auto text-blue-500">
+          Published on: {new Date(post.createdDate).toDateString()}
+        </p>
+      </div>
+
+      <p className="text-justify leading-7 text-lg">{post.description}</p>
+      <Comments post={post} />
+    </div>
+  );
+};
 
 export default DetailView;

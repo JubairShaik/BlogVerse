@@ -1,6 +1,5 @@
 import React from 'react';
 
- 
 
 const stats = [
   { name: 'React Projects', value: '12+' },

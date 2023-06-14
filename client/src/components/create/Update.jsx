@@ -1,55 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
-import { Box, styled, TextareaAutosize, Button, FormControl, InputBase } from '@mui/material';
-import { AddCircle as Add } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { API } from '../../service/api';
 
-const Container = styled(Box)(({ theme }) => ({
-    margin: '50px 100px',
-    [theme.breakpoints.down('md')]: {
-        margin: 0
-    }
-}));
-
-const Image = styled('img')({
-    width: '100%',
-    height: '50vh',
-    objectFit: 'cover'
-});
-
-const StyledFormControl = styled(FormControl)`
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-`;
-
-const InputTextField = styled(InputBase)`
-    flex: 1;
-    margin: 0 30px;
-    font-size: 25px;
-`;
-
-const StyledTextArea = styled(TextareaAutosize)`
-    width: 100%;
-    border: none;
-    margin-top: 50px;
-    font-size: 18px;
-    &:focus-visible {
-        outline: none;
-    }
-`;
-
-const initialPost = {
-    title: '',
-    description: '',
-    picture: '',
-    username: 'codeforinterview',
-    categories: 'Tech',
-    createdDate: new Date()
-}
-
+ 
 const Update = () => {
     const navigate = useNavigate();
 

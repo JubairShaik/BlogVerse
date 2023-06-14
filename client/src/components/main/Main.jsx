@@ -1,5 +1,5 @@
 import Banner from "./../banner/Banner";
-import Categories from "./Categories";
+ 
 import CategoriesHeader from "./CategoriesHeader";
 import Posts from "./post/Posts";
 import Footer from "../footer/Footer.jsx";

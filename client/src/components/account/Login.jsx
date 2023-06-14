@@ -1,328 +1,8 @@
-// import React, { useState } from 'react';
-// import Avatar from '@mui/material/Avatar';
-// import Button from '@mui/material/Button';
-// import CssBaseline from '@mui/material/CssBaseline';
-// import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
-// import Link from '@mui/material/Link';
-// import Grid from '@mui/material/Grid';
-// import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-// import Typography from '@mui/material/Typography';
-// import Container from '@mui/material/Container';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// import {styled } from '@mui/material';
-
-// import { API } from '../../service/api';
-
-// const Error = styled(Typography)`
-//     font-size: 10px;
-//     color: #ff6161;
-//     line-height: 0;
-//     margin-top: 10px;
-//     font-weight: 600;
-// `
-
-// function Login() {
-
-//   const signupInitialValues = {
-//     name: '',
-//     username: '',
-//     password: '',
-//   };
-
-//   const [account, toggleAccount] = useState('login');
-//   const [error, showError] = useState('');
-//   const [showPassword, setShowPassword] = useState(false);
-
-//   const [signup, setSignup] = useState(signupInitialValues);
-
-//   const handleShowPasswordToggle = () => {
-//     setShowPassword((prevShowPassword) => !prevShowPassword);
-//   };
-
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const data = new FormData(event.currentTarget);
-//     console.log({
-//       email: data.get('email'),
-//       username: data.get('username'),
-//       password: data.get('password')
-//     });
-//   };
-
-//   // on Clicking the password
-//   const handlePasswordInputChange = (event) => {
-//     const { value } = event.target;
-//     console.log('Password:', value);
-//   };
-
-//   // On Clicking the UserName Field
-//   const handleUsernameInputChange = (event) => {
-//     const { value } = event.target;
-//     console.log('Username:', value);
-//   };
-
-// const onInputChange = (e)=>{
-//   setSignup({...signup, [e.target.name] : e.target.value})
-// }
-
-//   const toggleSignup = () => {
-//     account === 'signup' ? toggleAccount('login') : toggleAccount('signup');
-//   }
-
-//   const signupUser = async () => {
-//     let response = await API.userSignup(signup);
-//     // processResponse Coming From Service/api.js
-//     if (response.isSuccess) {
-//         showError('');
-//         setSignup(signupInitialValues);
-//         toggleAccount('login');
-//     } else {
-//         showError('Something went wrong! please try again later');
-//     }
-// }
-
-//   return (
-//     <ThemeProvider theme={theme}>
-
-//     {
-
-//       account=== 'login' ?
-
-//       // Login Form
-//       <Container component="main" maxWidth="xs">
-//         <CssBaseline />
-//         <Box
-//           sx={{
-//             marginTop: 17,
-//             display: 'flex',
-//             flexDirection: 'column',
-//             alignItems: 'center',
-//           }}
-//         >
-//           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-//             <LockOutlinedIcon />
-//           </Avatar>
-//           <Typography component="h1" variant="h5">
-//             Sign into BlogVerse
-//           </Typography>
-//           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-//             <TextField
-//               margin="normal"
-//               required
-//               fullWidth
-//               id="email"
-//               label="Email Address"
-//               name="email"
-//               autoComplete="email"
-//               autoFocus
-//             />
-//             <TextField
-//               margin="normal"
-//               required
-//               fullWidth
-//               name="password"
-//               label="Password"
-//               type={showPassword ? 'text' : 'password'}
-//               id="password"
-//               autoComplete="current-password"
-//               onChange={handlePasswordInputChange}
-//             />
-//             <FormControlLabel
-//               control={
-//                 <Checkbox
-//                   value="remember"
-//                   color="primary"
-//                   onChange={handleShowPasswordToggle}
-//                 />
-//               }
-//               label="Show Password"
-//             />
-//             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-//               Sign In
-//             </Button>
-//             <Grid container>
-//               <Grid item xs>
-//                 <Link href="#" variant="body2">
-//                   Forgot password?
-//                 </Link>
-//               </Grid>
-//               <Grid item>
-//                 <Button  onClick= {()=>{toggleSignup()}} className= "cursor-pointer"  variant="body2">
-//                  create An Acount
-//                 </Button>
-//               </Grid>
-//             </Grid>
-//           </Box>
-//         </Box>
-//       </Container>
-
-//       :
-
-//       // SignUp Form
-//       <Container component="main" maxWidth="sm">
-//         <CssBaseline />
-//         <Box
-//           sx={{
-//             marginTop: 17,
-//             display: 'flex',
-//             flexDirection: 'column',
-//             alignItems: 'center',
-//           }}
-//         >
-//           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-//             <LockOutlinedIcon />
-//           </Avatar>
-
-//           <Typography component="h1" className= "text-[2rem] font-bold "  variant="h5">
-//              Create An Account in BlogVerses
-//           </Typography>
-
-//           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-//             <TextField
-//               margin="normal"
-//               required
-//               fullWidth
-//               id="email"
-//               label="Email Address"
-//               name="email"
-//               autoComplete="email"
-//               autoFocus
-//             />
-
-//           <TextField
-//             margin="normal"
-//             required
-//             fullWidth
-//             name="username"
-//             label="Enter Your UserName "
-//             id="username"
-//             autoComplete="current-username"
-//             onChange={handleUsernameInputChange}
-//           />
-
-//             <TextField
-//               margin="normal"
-//               required
-//               fullWidth
-//               name="password"
-//               label="Password"
-//               type={showPassword ? 'text' : 'password'}
-//               id="password"
-//               autoComplete="current-password"
-//               onChange={handlePasswordInputChange}
-//             />
-
-//             <FormControlLabel
-//               control={
-//                 <Checkbox
-//                   value="remember"
-//                   color="primary"
-//                   onChange={handleShowPasswordToggle}
-//                 />
-//               }
-//               label="Show Password"
-//             />
-
-//             {error && <Error>{error}</Error>}
-//             <Button
-//                type="submit"
-
-//                onClick={() => signupUser()}
-
-//                fullWidth variant="contained"
-//                sx={{ mt: 3, mb: 2 }}>
-//                  Craete Account
-//             </Button>
-
-//             <Grid container>
-//               <Grid item xs>
-//                 <Link href="#" variant="body2">
-//                   Forgot password?
-//                 </Link>
-//               </Grid>
-//               <Grid item>
-//                 <Link onClick={()=>toggleSignup()}  variant="body2">
-//                   Already Have Account
-//                 </Link>
-//               </Grid>
-//             </Grid>
-//           </Box>
-//         </Box>
-//       </Container>
-
-//     }
-
-//     </ThemeProvider>
-//   );
-// }
-
-// export default Login;
-import Container from '@mui/material/Container';
 import React, { useState, useEffect, useContext } from "react";
-import "typeface-poppins";
-import CssBaseline from '@mui/material/CssBaseline';
-import { TextField, Box, Button, Typography, styled } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Link, useNavigate } from "react-router-dom";
 import { API } from "../../service/api";
-import { DataContext } from "../../context/DataProvider.jsx";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Avatar from "@mui/material/Avatar";
-
- 
- 
-const Wrapper = styled(Box)`
-padding: 15px 10px;
-display: flex;
-flex: 1;
-width: 390px;
-overflow: auto;
-flex-direction: column;
-& > div,
-& > button,
-& > p {
-  margin-top: 20px;
-}
-`;
-
-
-const LoginButton = styled(Button)`
-  text-transform: none;
-  background: #fb641b;
- 
-  height: 48px;
-  font-size: 18px;
-  border-radius: 2px;
-`;
-
-const SignupButton = styled(Button)`
-text-transform: none;
-background: #fb641b;
-  color: #2874f0;
-  height: 48px;
-  font-size: 18px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 2px 2px 4px 2px rgb(0 0 0 / 40%);
-`;
-  
-  const Text = styled(Typography)`
-  
-  color: #444444;
- 
-`;
-
-const Error = styled(Typography)`
-  font-size: 10px;
-  color: #ff6161;
-  line-height: 0;
-  margin-top: 10px;
-  font-weight: 600;
-`;
+import { DataContext } from "../../context/DataProvider";
+import Blogverse from "../../assets/Blogverse1.png";
 
 const loginInitialValues = {
   username: "",
@@ -344,8 +24,6 @@ const Login = ({ isUserAuthenticated }) => {
   const navigate = useNavigate();
   const { setAccount } = useContext(DataContext);
 
-  const imageURL =
-    "https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png";
   useEffect(() => {
     showError(false);
   }, [login]);
@@ -359,8 +37,6 @@ const Login = ({ isUserAuthenticated }) => {
   };
 
   const loginUser = async () => {
-
-
     let response = await API.userLogin(login);
     if (response.isSuccess) {
       showError("");
@@ -373,9 +49,7 @@ const Login = ({ isUserAuthenticated }) => {
         "refreshToken",
         `Bearer ${response.data.refreshToken}`
       );
-      
-      sessionStorage.setItem("isAuthenticated", 
-      true);
+      sessionStorage.setItem("isAuthenticated", true);
 
       setAccount({
         name: response.data.name,
@@ -401,123 +75,167 @@ const Login = ({ isUserAuthenticated }) => {
     }
   };
 
-  const toggleSignup = () => {
-    account === "signup" ? toggleAccount("login") : toggleAccount("signup");
-  };
-
-  const theme = createTheme({
-    typography: {
-      fontFamily: "Poppins, sans-serif",
-    },
-  });
-
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="sm">
-      <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 17,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+    <div className="flex  mt-[5rem]   flex-1  flex-col justify-center px-8 py-12 lg:px-8">
+      <div>
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="flex flex-col items-center">
+            <img
+              className="mx-auto h-[3.5rem] sm:h-[4.5rem] w-auto"
+              src={Blogverse}
+              alt="logo"
+            />
 
-          
-    {account === "login" ? (
+            <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              {account === "login"
+                ? "Sign in to BlogVerse"
+                : "Create an Account"}
+            </h2>
 
-            
-    <Wrapper>
-      <Typography
-        component="h1"
-        style={{ textAlign: "center" }}
-        variant="h5"
-      > Sign-in to BlogVerse</Typography>
-      <TextField
-        value={login.username}
-        onChange={(e) => onValueChange(e)}
-        name="username"
-        label="Enter Your Username"
-        margin="normal"
-        required
-        fullWidth
-      />
-      <TextField
-        value={login.password}
-        onChange={(e) => onValueChange(e)}
-        name="password"
-        label="Enter Password"
-      />
+            {account === "login" ? (
+              <div
+                className="space-y-10"
+                className="w-full"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <label className="block mt-5 text-sm font-medium leading-6 text-gray-900">
+                  Username
+                </label>
 
-      {error && <Error>{error}</Error>}
+                <div className="mt-2">
+                  <input
+                    value={login.username}
+                    name="username"
+                    autoComplete="email"
+                    required
+                    onChange={(e) => onValueChange(e)}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
 
-      <LoginButton variant="contained" onClick={() => loginUser()}>
-        Login 
-      </LoginButton>
-      <Text style={{ textAlign: "center" }}>OR</Text>
-      <SignupButton
-        onClick={() => toggleSignup()}
-        style={{ marginBottom: 50 }}
-      >
-        Create an account
-      </SignupButton>
-    </Wrapper>
-  ) : (
-    <Wrapper>
+                <div className="flex items-center justify-between">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Password
+                  </label>
+                  <div className="text-sm">
+                    <a
+                      href="#"
+                      className="font-semibold text-indigo-600 hover:text-indigo-500"
+                    >
+                      Forgot password?
+                    </a>
+                  </div>
+                </div>
 
-    <Typography
-    component="h1"
-    style={{ textAlign: "center" }}
-    variant="h5"
-  >  Create an Account</Typography>
-      <TextField
-         
-        onChange={(e) => onInputChange(e)}
-        name="name"
-        label="Enter Name"
-      />
-      <TextField
-       
-        onChange={(e) => onInputChange(e)}
-        name="username"
-        label="Enter Username"
-      />
-      <TextField
-         
-        onChange={(e) => onInputChange(e)}
-        name="password"
-        label="Enter Password"
-      />
+                <div className="mt-2">
+                  <input
+                    value={login.password}
+                    onChange={(e) => onValueChange(e)}
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
 
-      <SignupButton onClick={() => signupUser()}>Signup</SignupButton>
+                <button
+                  onClick={() => loginUser()}
+                  type="submit"
+                  className="flex w-full mt-3 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Sign in
+                </button>
 
-      
-      <Text style={{ textAlign: "center" }}>OR</Text>
-      <LoginButton variant="contained" onClick={() => toggleSignup()}>
-        Already have an account
-      </LoginButton>
-    </Wrapper>
-)}
+                <h3 className="text-center">or</h3>
 
+                <button
+                  className="text-blue-500 mt-2"
+                  onClick={() => toggleAccount("signup")}
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Create an Account
+                </button>
+              </div>
+            ) : (
+              <form className="w-full" onSubmit={(e) => e.preventDefault()}>
+                <div className="my-2">
+                  <label className="block mt-5 text-sm font-medium leading-6 text-gray-900">
+                    Enter Your Name
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      value={signup.name}
+                      name="name"
+                      autoComplete="name"
+                      required
+                      onChange={(e) => onInputChange(e)}
+                      className="block w-full rounded-md border-0  p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
-        
+                <div className="my-2">
+                  <label className="block mt-5 text-sm font-medium leading-6 text-gray-900">
+                    Enter Your Username
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      value={signup.username}
+                      onChange={(e) => onInputChange(e)}
+                      name="username"
+                      required
+                      onChange={(e) => onInputChange(e)}
+                      className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
 
+                <div className="my-2">
+                  <label className="block mt-2 text-sm font-medium leading-6 text-gray-900">
+                    Password
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      value={signup.password}
+                      onChange={(e) => onInputChange(e)}
+                      name="password"
+                      required
+                      onChange={(e) => onInputChange(e)}
+                      className="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <button
+               
+                  onClick={() => signupUser()}
+                  className="flex w-full mt-6 justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                   Complete SignUp
+                </button>
 
  
-
-
- 
-        </Box>
-      </Container>
-    </ThemeProvider>
+                <div className="flex justify-between gap-6 items-center mt-4">
+                  <h2>Already have an account?</h2>
+                  <Link
+                    to="#"
+                    onClick={() => toggleAccount("login")}
+                    className=" px-2 py-1 rounded-[3px] bg-orange-500 text-white  mx-1 cursor-pointer"
+                  >
+                    Sign In
+                  </Link>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default Login;
-
-
-

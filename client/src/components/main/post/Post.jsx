@@ -1,4 +1,4 @@
-import { styled, Box, Typography } from "@mui/material";
+ 
 import BlurImage from "./BlurImage";
 
 const Post = ({ post }) => {
